@@ -1,4 +1,4 @@
-name: Kubnews CI
+name: Fullstack CI
 
 on: push
 
