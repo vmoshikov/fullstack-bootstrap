@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  nginx:
+    build: ./build/nginx/
+    ports:
+      - "8443:443"
+      - "8880:80"
+    depends_on:
+#      - backend
+      - frontend
+    volumes:
+      - ./build/nginx/:/etc/nginx/conf.d/
+    networks:
+      - project-network
+
+#  backend:
+#    build: ./components/backend/
+#    restart: always
+#    ports:
+#      - "8000:8000"
+#    volumes:
+#      - ./components/backend/:/app/
+#    networks:
+#      - project-network
+
+  frontend:
+    build: components/frontend/
+#    depends_on:
+#      - backend
+    links:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      - API_HOST=backend
+    networks:
+      - project-network
+
+networks:
+  project-network:
+    driver: bridge
