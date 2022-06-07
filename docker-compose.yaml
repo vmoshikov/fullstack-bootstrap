@@ -28,8 +28,8 @@ services:
     build: components/frontend/
 #    depends_on:
 #      - backend
-    links:
-      - backend
+#    links:
+#      - backend
     ports:
       - "3000:3000"
     environment:
